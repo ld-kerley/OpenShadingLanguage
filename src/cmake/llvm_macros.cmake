@@ -84,6 +84,10 @@ function ( EMBED_LLVM_BITCODE_IN_CPP src_list suffix output_name list_to_append_
         COMMAND ${LLVM_BC_GENERATOR}
             ${LLVM_COMPILE_FLAGS}
             ${ALL_INCLUDE_DIRS}
+
+            # Added to force the discovery of the c++ standard headers on MACOS
+            -isysroot ${CMAKE_OSX_SYSROOT}
+
             -DOSL_COMPILING_TO_BITCODE=1
             -Wno-deprecated-register
             # the following 2 warnings can be restored when all 3rd parties have fixed their export macros
